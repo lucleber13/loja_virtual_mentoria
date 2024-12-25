@@ -1,5 +1,6 @@
 package com.cbcode.loja_virtual_mentoria.model;
 
+import com.cbcode.loja_virtual_mentoria.enums.AddressType;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -42,6 +43,9 @@ public class Address implements Serializable {
     @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "fk_address_person", value = ConstraintMode.CONSTRAINT))
     private Person person;
+
+    @Enumerated(EnumType.STRING)
+    private AddressType addressType;
 
     public Address() {
     }
@@ -127,6 +131,14 @@ public class Address implements Serializable {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
     }
 
     @Override
