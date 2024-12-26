@@ -1,0 +1,103 @@
+/*
+ * This function is used to validate if the person exists in the database before inserting or updating the key person
+    * in the product_reviews, accounts_payable and accounts_receivable tables.
+    * If the person does not exist, an exception is thrown.
+ */
+CREATE OR REPLACE FUNCTION validateKeyPerson()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+
+declare exists int;
+
+BEGIN
+    exists = (select count(1) from private_person where id = NEW.person_id);
+    if (exists <= 0 ) then
+        exists = (select count(1) from business_person where id = NEW.person_id);
+        if (exists <= 0 ) then
+            RAISE EXCEPTION 'Person with ID or Pk does not exist to update the key person';
+        end if;
+    end if;
+    RETURN NEW;
+END;
+$$;
+
+/*
+    * This function is used to validate if the person exists in the database before inserting or updating the key person
+        * in the accounts_payable table as instance person_sup_id.
+        * If the person does not exist, an exception is thrown.
+*/
+CREATE OR REPLACE FUNCTION validateKeyPerson2()
+    RETURNS TRIGGER
+    LANGUAGE plpgsql
+AS $$
+
+declare exists int;
+
+BEGIN
+    exists = (select count(1) from private_person where id = NEW.person_sup_id);
+    if (exists <= 0 ) then
+        exists = (select count(1) from business_person where id = NEW.person_sup_id);
+        if (exists <= 0 ) then
+            RAISE EXCEPTION 'Person with ID or Pk does not exist to update the key person';
+        end if;
+    end if;
+    RETURN NEW;
+END;
+$$;
+
+-- Trigger to validate the key person in the product_reviews table before inserting or updating the key person.
+CREATE TRIGGER validateKeyPersonProductReviews
+BEFORE INSERT OR UPDATE
+    ON public.product_reviews
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.validateKeyPerson();
+
+-- Trigger to validate the key person in the accounts_payable table before inserting or updating the key person.
+CREATE TRIGGER validateKeyAccountsPayable
+    BEFORE INSERT OR UPDATE
+    ON public.accounts_payable
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson();
+
+-- Trigger to validate the key person supplier in the accounts_payable table before inserting or updating the key person.
+CREATE TRIGGER validateKeyAccountsPayablePersonSup
+    BEFORE INSERT OR UPDATE
+    ON public.accounts_payable
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson2();
+
+-- Trigger to validate the key person in the accounts_receivable table before inserting or updating the key person.
+CREATE TRIGGER validateKeyAccountsReceivable
+    BEFORE INSERT OR UPDATE
+    ON public.accounts_receivable
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson();
+
+-- Trigger to validate the key person in the address table before inserting or updating the key person.
+CREATE TRIGGER validateKeyAddresses
+    BEFORE INSERT OR UPDATE
+    ON public.address
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson();
+
+-- Trigger to validate the key person in the online_store_transaction table before inserting or updating the key person.
+CREATE TRIGGER validateKeyOnlineStoreTransaction
+    BEFORE INSERT OR UPDATE
+    ON public.online_store_transaction
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson();
+
+-- Trigger to validate the key person in the purchase_invoice table before inserting or updating the key person.
+CREATE TRIGGER validateKeyPurchaseInvoice
+    BEFORE INSERT OR UPDATE
+    ON public.purchase_invoice
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson();
+
+-- Trigger to validate the key person in the users table before inserting or updating the key person.
+CREATE TRIGGER validateKeyUsers
+    BEFORE INSERT OR UPDATE
+    ON public.users
+    FOR EACH ROW
+EXECUTE PROCEDURE public.validateKeyPerson();
