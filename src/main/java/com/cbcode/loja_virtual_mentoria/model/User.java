@@ -35,9 +35,9 @@ public class User implements UserDetails,Serializable {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role_id"}, name = "unique_role_user"),
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", table = "users", unique = false,
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", table = "users",
                     foreignKey = @ForeignKey(name = "user_fk", value = ConstraintMode.CONSTRAINT)),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "roles", unique = false,
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "roles",
                     foreignKey = @ForeignKey(name = "role_fk", value = ConstraintMode.CONSTRAINT)))
     private List<Role> roles;
 
