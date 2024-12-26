@@ -23,8 +23,11 @@ public class TrackingStatus implements Serializable {
     private Long id;
 
     private String distributionCenter;
+
     private String city;
+
     private String state;
+
     private String status;
 
     @ManyToOne

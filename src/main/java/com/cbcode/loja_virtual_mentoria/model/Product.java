@@ -28,8 +28,8 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Boolean active = Boolean.TRUE;
 
-
-    @Column(columnDefinition = "TEXT", length = 2000, nullable = false) // This column can store up to 2000 characters in the database table column definition
+    // This column can store up to 2000 characters in the database table column definition
+    @Column(columnDefinition = "TEXT", length = 2000, nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -49,9 +49,13 @@ public class Product implements Serializable {
 
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity = 0;
+
     private Integer minimumStockQuantity = 0;
+
     private String youtubeUrl;
+
     private Boolean alertStockQuantity = Boolean.FALSE;
+
     private Integer clickCount = 0;
 
     public Product() {
@@ -72,8 +76,6 @@ public class Product implements Serializable {
         this.youtubeUrl = youtubeUrl;
         this.alertStockQuantity = alertStockQuantity;
     }
-
-
 
     public Long getId() {
         return id;

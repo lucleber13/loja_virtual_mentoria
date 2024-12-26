@@ -24,21 +24,22 @@ public class OnlineStoreTransaction implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "online_store_transaction_seq")
     private Long id;
 
-    @ManyToOne(targetEntity = Person.class)
+    @ManyToOne(targetEntity = Person.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_person", value = ConstraintMode.CONSTRAINT))
     private Person person;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_address_id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_delivery_address", value = ConstraintMode.CONSTRAINT))
     private Address deliveryAddress;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_billing_address", value = ConstraintMode.CONSTRAINT))
     private Address billingAddress;
 
+    @Column(nullable = false)
     private BigDecimal totalValue;
 
     private BigDecimal discountValue;
@@ -48,21 +49,27 @@ public class OnlineStoreTransaction implements Serializable {
             foreignKey = @ForeignKey(name = "fk_payment_method", value = ConstraintMode.CONSTRAINT))
     private PaymentMethods paymentMethod;
 
-    @OneToOne
-    @JoinColumn(name = "sales_invoice_id", nullable = false,
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sales_invoice_id", nullable = true,
             foreignKey = @ForeignKey(name = "fk_sales_invoice", value = ConstraintMode.CONSTRAINT))
     private SalesInvoice salesInvoice;
 
     @ManyToOne
-    @JoinColumn(name = "discount_coupon_id", nullable = false,
+    @JoinColumn(name = "discount_coupon_id",
             foreignKey = @ForeignKey(name = "fk_discount_coupon", value = ConstraintMode.CONSTRAINT))
     private DiscountCoupon discountCoupon;
 
+    @Column(nullable = false)
     private BigDecimal deliveryFee;
 
+    @Column(nullable = false)
     private Integer deliveryTimeInDays;
+
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
+
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date saleDate;
 

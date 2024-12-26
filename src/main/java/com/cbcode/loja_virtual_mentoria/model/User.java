@@ -31,6 +31,7 @@ public class User implements UserDetails,Serializable {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date actualDatePassword;
 
