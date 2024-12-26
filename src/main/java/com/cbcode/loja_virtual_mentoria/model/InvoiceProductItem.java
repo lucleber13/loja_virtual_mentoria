@@ -27,7 +27,7 @@ public class InvoiceProductItem implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "invoice_buyer_id", nullable = false, foreignKey = @ForeignKey(name = "invoice_buyer_fk", value = ConstraintMode.CONSTRAINT))
-    private InvoiceBuyer invoiceBuyer;
+    private PurchaseInvoice purchaseInvoice;
 
     public InvoiceProductItem() {
     }
@@ -60,12 +60,12 @@ public class InvoiceProductItem implements Serializable {
         this.product = product;
     }
 
-    public InvoiceBuyer getInvoiceBuyer() {
-        return invoiceBuyer;
+    public PurchaseInvoice getInvoiceBuyer() {
+        return purchaseInvoice;
     }
 
-    public void setInvoiceBuyer(InvoiceBuyer invoiceBuyer) {
-        this.invoiceBuyer = invoiceBuyer;
+    public void setInvoiceBuyer(PurchaseInvoice purchaseInvoice) {
+        this.purchaseInvoice = purchaseInvoice;
     }
 
     @Override

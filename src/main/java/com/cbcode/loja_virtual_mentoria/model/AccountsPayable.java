@@ -10,15 +10,15 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "accounts_payment")
-@SequenceGenerator(name = "accounts_payment_seq", sequenceName = "accounts_payment_seq", allocationSize = 1)
-public class AccountsPayment implements Serializable {
+@Table(name = "accounts_payable")
+@SequenceGenerator(name = "accounts_payable_seq", sequenceName = "accounts_payable_seq", allocationSize = 1)
+public class AccountsPayable implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_payment_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_payable_seq")
     private Long id;
 
     @Column(name = "description")
@@ -50,10 +50,10 @@ public class AccountsPayment implements Serializable {
     @JoinColumn(name = "person_sup_id", nullable = false, foreignKey = @ForeignKey(name = "person_sup_fk", value = ConstraintMode.CONSTRAINT))
     private Person person_supplier;
 
-    public AccountsPayment() {
+    public AccountsPayable() {
     }
 
-    public AccountsPayment(Long id, String description, AccountsPaymentStatus status, Date dueDate, Date paymentDate, BigDecimal totalValue, BigDecimal discountValue) {
+    public AccountsPayable(Long id, String description, AccountsPaymentStatus status, Date dueDate, Date paymentDate, BigDecimal totalValue, BigDecimal discountValue) {
         this.id = id;
         this.description = description;
         this.status = status;
@@ -139,7 +139,7 @@ public class AccountsPayment implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        AccountsPayment that = (AccountsPayment) o;
+        AccountsPayable that = (AccountsPayable) o;
         return Objects.equals(id, that.id);
     }
 

@@ -9,15 +9,15 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "invoice_buyer")
-@SequenceGenerator(name = "invoice_buyer_seq", sequenceName = "invoice_buyer_seq", allocationSize = 1)
-public class InvoiceBuyer implements Serializable {
+@Table(name = "purchase_invoice")
+@SequenceGenerator(name = "purchase_invoice_seq", sequenceName = "purchase_invoice_seq", allocationSize = 1)
+public class PurchaseInvoice implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoice_buyer_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_invoice_seq")
     private Long id;
 
     private String invoiceNumber;
@@ -35,12 +35,12 @@ public class InvoiceBuyer implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "accounts_payment_id", nullable = false, foreignKey = @ForeignKey(name = "accounts_payment_fk", value = ConstraintMode.CONSTRAINT))
-    private AccountsPayment accountsPayment;
+    private AccountsPayable accountsPayable;
 
-    public InvoiceBuyer() {
+    public PurchaseInvoice() {
     }
 
-    public InvoiceBuyer(String invoiceNumber, String invoiceSeries, String description, BigDecimal totalValue, BigDecimal valueDiscount, BigDecimal valueIcms, Date issueDate) {
+    public PurchaseInvoice(String invoiceNumber, String invoiceSeries, String description, BigDecimal totalValue, BigDecimal valueDiscount, BigDecimal valueIcms, Date issueDate) {
         this.invoiceNumber = invoiceNumber;
         this.invoiceSeries = invoiceSeries;
         this.description = description;
@@ -122,18 +122,18 @@ public class InvoiceBuyer implements Serializable {
         this.person = person;
     }
 
-    public AccountsPayment getAccountsPayment() {
-        return accountsPayment;
+    public AccountsPayable getAccountsPayment() {
+        return accountsPayable;
     }
 
-    public void setAccountsPayment(AccountsPayment accountsPayment) {
-        this.accountsPayment = accountsPayment;
+    public void setAccountsPayment(AccountsPayable accountsPayable) {
+        this.accountsPayable = accountsPayable;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        InvoiceBuyer that = (InvoiceBuyer) o;
+        PurchaseInvoice that = (PurchaseInvoice) o;
         return Objects.equals(id, that.id);
     }
 
