@@ -25,7 +25,7 @@ public class Address implements Serializable {
     @Column(name = "number", nullable = false)
     private String number;
 
-    @Column(name = "complement", nullable = false)
+    @Column(name = "complement")
     private String complement;
 
     @Column(name = "neighborhood", nullable = false)
@@ -44,6 +44,7 @@ public class Address implements Serializable {
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "fk_address_person", value = ConstraintMode.CONSTRAINT))
     private Person person;
 
+    @Column(name = "address_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private AddressType addressType;
 

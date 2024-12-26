@@ -18,7 +18,7 @@ public class PaymentMethods implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_methods_seq")
     private Long id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     public PaymentMethods() {

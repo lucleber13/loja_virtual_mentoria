@@ -20,12 +20,23 @@ public class PurchaseInvoice implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_invoice_seq")
     private Long id;
 
+    @Column(name = "invoice_number", nullable = false)
     private String invoiceNumber;
+
+    @Column(name = "invoice_series", nullable = false)
     private String invoiceSeries;
+
     private String description;
+
+    @Column(name = "total_value", nullable = false)
     private BigDecimal totalValue;
+
     private BigDecimal valueDiscount;
+
+    @Column(name = "value_icms", nullable = false)
     private BigDecimal valueIcms;
+
+    @Column(name = "issue_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date issueDate;
 
@@ -34,7 +45,7 @@ public class PurchaseInvoice implements Serializable {
     private Person person;
 
     @ManyToOne
-    @JoinColumn(name = "accounts_payment_id", nullable = false, foreignKey = @ForeignKey(name = "accounts_payment_fk", value = ConstraintMode.CONSTRAINT))
+    @JoinColumn(name = "accounts_payable_id", nullable = false, foreignKey = @ForeignKey(name = "accounts_payable_fk", value = ConstraintMode.CONSTRAINT))
     private AccountsPayable accountsPayable;
 
     public PurchaseInvoice() {

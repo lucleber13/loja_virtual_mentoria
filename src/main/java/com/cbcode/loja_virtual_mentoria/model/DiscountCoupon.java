@@ -20,9 +20,11 @@ public class DiscountCoupon implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discount_coupon_seq")
     private Long id;
 
+    @Column(name = "code_discount", nullable = false)
     private String codeDiscount;
     private BigDecimal discountValue;
     private BigDecimal realValueDiscount;
+    @Column(name = "expiration_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date expirationDate;
 

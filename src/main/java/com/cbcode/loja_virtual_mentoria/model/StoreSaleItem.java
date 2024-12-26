@@ -22,6 +22,7 @@ public class StoreSaleItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "default_gen")
     private Long id;
 
+    @Column(name = "quantity", nullable = false)
     private Double quantity;
 
     @ManyToOne

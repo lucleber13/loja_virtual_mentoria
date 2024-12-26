@@ -21,14 +21,14 @@ public class AccountsPayable implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_payable_seq")
     private Long id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccountsPaymentStatus status;
 
-    @Column(name = "due_date")
+    @Column(name = "due_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dueDate;
 
@@ -36,7 +36,7 @@ public class AccountsPayable implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
 
-    @Column(name = "total_value")
+    @Column(name = "total_value", nullable = false)
     private BigDecimal totalValue;
 
     @Column(name = "discount_value")

@@ -26,7 +26,7 @@ public class InvoiceProductItem implements Serializable {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "invoice_buyer_id", nullable = false, foreignKey = @ForeignKey(name = "invoice_buyer_fk", value = ConstraintMode.CONSTRAINT))
+    @JoinColumn(name = "purchase_invoice_id", nullable = false, foreignKey = @ForeignKey(name = "purchase_invoice_fk", value = ConstraintMode.CONSTRAINT))
     private PurchaseInvoice purchaseInvoice;
 
     public InvoiceProductItem() {

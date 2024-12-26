@@ -10,10 +10,18 @@ public class BusinessPerson extends Person {
 
     @Column(name = "cnpj", nullable = false)
     private String cnpj;
+
+    @Column(name = "county_registration", nullable = false)
     private String countyRegistration;
+
     private String townRegistration;
+
+    @Column(name = "fantasy_name", nullable = false)
     private String fantasyName;
+
+    @Column(name = "company_name", nullable = false)
     private String companyName;
+
     private String category;
 
     public BusinessPerson() {

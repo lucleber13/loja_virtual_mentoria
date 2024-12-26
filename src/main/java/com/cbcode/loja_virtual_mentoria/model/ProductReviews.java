@@ -21,9 +21,10 @@ public class ProductReviews implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_reviews_seq")
     private Long id;
-
+    @Column(nullable = false)
     private Integer rating;
 
+    @Column(nullable = false)
     private String review;
 
     @ManyToOne

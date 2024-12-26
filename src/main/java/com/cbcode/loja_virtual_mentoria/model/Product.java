@@ -19,16 +19,35 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
     private Long id;
 
+    @Column(name = "unity_type", nullable = false)
     private String unityType;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private Boolean active = Boolean.TRUE;
-    @Column(columnDefinition = "TEXT", length = 2000) // This column can store up to 2000 characters in the database table column definition
+
+
+    @Column(columnDefinition = "TEXT", length = 2000, nullable = false) // This column can store up to 2000 characters in the database table column definition
     private String description;
+
+    @Column(nullable = false)
     private Double weight;
+
+    @Column(nullable = false)
     private Double width;
+
+    @Column(nullable = false)
     private Double height;
+
+    @Column(nullable = false)
     private Double length;
+
+    @Column(name = "sale_price", nullable = false)
     private BigDecimal salePrice = BigDecimal.ZERO;
+
+    @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity = 0;
     private Integer minimumStockQuantity = 0;
     private String youtubeUrl;
@@ -53,6 +72,8 @@ public class Product implements Serializable {
         this.youtubeUrl = youtubeUrl;
         this.alertStockQuantity = alertStockQuantity;
     }
+
+
 
     public Long getId() {
         return id;
