@@ -94,7 +94,6 @@ CREATE TABLE business_person
     name                VARCHAR(255) NOT NULL,
     email               VARCHAR(255) NOT NULL,
     phone               VARCHAR(255) NOT NULL,
-    person_type         VARCHAR(255),
     cnpj                VARCHAR(255) NOT NULL,
     county_registration VARCHAR(255) NOT NULL,
     town_registration   VARCHAR(255),
@@ -169,7 +168,6 @@ CREATE TABLE private_person
     name        VARCHAR(255) NOT NULL,
     email       VARCHAR(255) NOT NULL,
     phone       VARCHAR(255) NOT NULL,
-    person_type VARCHAR(255),
     cpf         VARCHAR(255) NOT NULL,
     birth_date  date,
     CONSTRAINT pk_private_person PRIMARY KEY (id)
@@ -312,9 +310,6 @@ ALTER TABLE online_store_transaction
 
 ALTER TABLE online_store_transaction
     ADD CONSTRAINT FK_DISCOUNT_COUPON FOREIGN KEY (discount_coupon_id) REFERENCES discount_coupon (id);
-
-ALTER TABLE tracking_status
-    ADD CONSTRAINT FK_ONLINE_STORE_TRANSACTION FOREIGN KEY (online_store_transaction_id) REFERENCES online_store_transaction (id);
 
 ALTER TABLE tracking_status
     ADD CONSTRAINT FK_ONLINE_STORE_TRANSACTION FOREIGN KEY (online_store_transaction_id) REFERENCES online_store_transaction (id);
