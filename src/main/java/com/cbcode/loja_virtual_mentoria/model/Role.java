@@ -1,5 +1,6 @@
 package com.cbcode.loja_virtual_mentoria.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -22,17 +23,10 @@ public class Role implements GrantedAuthority, Serializable {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @JsonIgnore
     @Override
     public String getAuthority() {
         return this.role;
-    }
-
-    public Role() {
-    }
-
-    public Role(Long id, String role) {
-        this.id = id;
-        this.role = role;
     }
 
     public Long getId() {

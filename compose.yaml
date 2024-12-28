@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:13'
     environment:
       - 'POSTGRES_DB=loja_virtual_mentoria'
       - 'POSTGRES_PASSWORD=admin'

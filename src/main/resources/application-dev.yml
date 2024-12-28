@@ -1,0 +1,85 @@
+
+# Database
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/loja_virtual_mentoria?autoReconnect=true
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 30000 # 30 seconds
+      maximum-pool-size: 50 # Maximum 50 connections
+      minimum-idle: 10 # Minimum 10 idle connections
+      idle-timeout: 600000 # 10 minutes
+      pool-name: PoolHikari
+      auto-commit: false # Disable auto-commit
+
+    dbcp2:
+      pool-prepared-statements: true # Enable prepared statements
+      max-open-prepared-statements: 50 # Maximum 50 prepared statements
+
+  # Load static resources example css, js, images
+  mvc:
+    static-path-pattern: /resources/static/**
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    schemas: public
+
+  servlet:
+    multipart:
+      max-file-size: 10000KB # 10MB
+      max-request-size: 10000KB # 10MB
+      enabled: true
+
+  # JPA
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none # Disable automatic DDL generation
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: true
+        jdbc:
+          batch_size: 4 # 4 inserts per batch
+        order_inserts: true # Order inserts by primary key to avoid constraint violations in batch inserts
+        order_updates: true # Order updates by primary key to avoid constraint violations in batch updates
+
+  # Transaction
+  transaction:
+    rollback-on-commit-failure: true # Rollback transaction on commit failure (e.g. a constraint violation)
+
+  # Clean up session data
+  session:
+    jdbc:
+      cleanup-cron: 0 0 4 * * * # Clean up session data at 4am every day (cron expression)
+
+# Server
+server:
+  port: 8080
+  servlet:
+    context-path: /loja_virtual_mentoria
+    encoding:
+      charset: utf-8 # UTF-8 encoding for HTTP requests and responses
+      enabled: true # Enable encoding for HTTP requests and responses
+      force: true # Force encoding to UTF-8 for all requests and responses (including headers)
+      force-request: true # Force encoding to UTF-8 for all requests
+      force-response: true # Force encoding to UTF-8 for all responses
+      #session:
+      #timeout: 240m
+  compression: # Enable compression for HTTP responses (e.g. GZIP)
+    enabled: true # Enable compression
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/css,text/javascript,text/json # Compress the following MIME types
+    min-response-size: 1024 # Minimum response size to compress (1KB)
+  http2: # Enable HTTP/2
+    enabled: true # Enable HTTP/2 support for the server (requires SSL)
+  tomcat:
+    max-connections: 50000 # Maximum 50,000 connections
+    threads:
+      min-spare: 1000 # Minimum 1,000 threads in the pool (default is 10)
+

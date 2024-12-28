@@ -24,19 +24,6 @@ public class BusinessPerson extends Person {
 
     private String category;
 
-    public BusinessPerson() {
-    }
-
-    public BusinessPerson(Long id, String name, String email, String phone, String cnpj, String countyRegistration, String townRegistration, String fantasyName, String companyName, String category) {
-        super(id, name, email, phone);
-        this.cnpj = cnpj;
-        this.countyRegistration = countyRegistration;
-        this.townRegistration = townRegistration;
-        this.fantasyName = fantasyName;
-        this.companyName = companyName;
-        this.category = category;
-    }
-
     public String getCnpj() {
         return cnpj;
     }

@@ -17,14 +17,6 @@ public class PrivatePerson extends Person {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    public PrivatePerson() {
-    }
-
-    public PrivatePerson(Long id, String name, String email, String phone, String cpf, Date birthDate) {
-        super(id, name, email, phone);
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-    }
 
     public String getCpf() {
         return cpf;
