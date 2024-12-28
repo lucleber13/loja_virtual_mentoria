@@ -1,0 +1,85 @@
+
+# Database
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/loja_virtual_mentoria?autoReconnect=true&useSSL=false
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      # This property controls the maximum amount of time (in milliseconds) that a connection is allowed to sit idle in the pool.
+      connection-timeout: 20000
+        # This property controls the maximum size that the pool is allowed to reach, including both idle and in-use connections.
+      maximum-pool-size: 550
+        # This property controls the minimum number of idle connections that HikariCP tries to maintain in the pool.
+      minimum-idle: 200
+        # This property controls the maximum lifetime of a connection in the pool.
+      idle-timeout: 10000
+      pool-name: PoolHikari
+      auto-commit: false
+
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 550
+
+  # Load static resources example css, js, images
+  mvc:
+    static-path-pattern: /resources/static/**
+
+  servlet:
+    multipart:
+      max-file-size: 10000KB
+      max-request-size: 10000KB
+      enabled: true
+
+  # JPA
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: true
+        jdbc:
+          batch_size: 4
+        order_inserts: true
+        order_updates: true
+    database: postgresql
+
+  # Transaction
+  transaction:
+    rollback-on-commit-failure: true
+
+# Clean up session data
+  session:
+    jdbc:
+      cleanup-cron: 0 0 4 * * *
+
+# Server
+server:
+  port: 8080
+  servlet:
+    context-path: /loja-virtual-mentoria
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+      force-request: true
+      force-response: true
+    #session:
+      #timeout: 240m
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/css,text/javascript,text/json
+    min-response-size: 1024
+  http2:
+    enabled: true
+  tomcat:
+    max-connections: 50000
+    threads:
+      min-spare: 1000
+
